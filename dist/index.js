@@ -8411,8 +8411,6 @@ exports.prWorkflow = async function () {
         }
     }
 
-    console.log(issues);
-
     if (issues.length === 0) {
         console.log(`Not found any issues related to current PR and all children PRs`);
         return;
@@ -8423,7 +8421,6 @@ exports.prWorkflow = async function () {
 
         const res = await getIssueProjectID(issue.id);
         const projectList = res.node.projectItems.nodes;
-        console.log(projectList);
 
         // Iterate through every project linked to this issue
         for (let j = 0; j < projectList.length; j++) {
@@ -8496,7 +8493,7 @@ async function lastPullRequests(owner, repo, destinationBranch) {
     const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!) {
             repository(owner: $owner, name: $name) {
-                pullRequests(last: 20, baseRefName: $branch) {
+                pullRequests(last: 2, baseRefName: $branch, states: [OPEN]) {
                     edges {
                         node {
                             id

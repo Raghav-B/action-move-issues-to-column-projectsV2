@@ -51,7 +51,7 @@ async function lastPullRequests(owner, repo, destinationBranch) {
     const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!) {
             repository(owner: $owner, name: $name) {
-                pullRequests(last: 20, baseRefName: $branch) {
+                pullRequests(last: 2, baseRefName: $branch, states: [OPEN]) {
                     edges {
                         node {
                             id

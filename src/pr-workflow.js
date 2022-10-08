@@ -42,8 +42,6 @@ exports.prWorkflow = async function () {
         }
     }
 
-    console.log(issues);
-
     if (issues.length === 0) {
         console.log(`Not found any issues related to current PR and all children PRs`);
         return;
@@ -54,7 +52,6 @@ exports.prWorkflow = async function () {
 
         const res = await getIssueProjectID(issue.id);
         const projectList = res.node.projectItems.nodes;
-        console.log(projectList);
 
         // Iterate through every project linked to this issue
         for (let j = 0; j < projectList.length; j++) {
