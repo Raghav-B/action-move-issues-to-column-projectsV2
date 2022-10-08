@@ -8,29 +8,19 @@ inputs:
   github_token:
     description: GitHub token.
     required: false
-  project:
-    description: Project Name.
-    required: true
-  column:
-    description: Project Column Name.
-    required: true
-  marker:
-    description: Substring to mark issue.  
-    required: false
-    default: ''
-  type:
-    description: Project Type (org, repo, user).
-    required: true
-    default: 'repo'
   owner:
     description: Project Owner.
     required: true
   repo:
-    description: Project Repository.
-    required: false
-  branch:
-    description: The PR's destination branch.
-    required: false
+    description: Repository with PR.
+    required: true
+
+  fieldID:
+    description: ID of field to change
+    required: true
+  optionID:
+    description: Option to change field to
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

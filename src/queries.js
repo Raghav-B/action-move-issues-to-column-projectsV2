@@ -1,24 +1,57 @@
 const graphqlApi = require('./graphql');
 
-async function updateProjectCardColumn(cardId, columnId) {
+async function updateProjectCardColumn(projectID, fieldID, issueID, optionID) {
     const result = await graphqlApi.query(
-        `mutation updateProjectCard($cardId: ID!, $columnId: ID!) {
-            moveProjectCard(input:{cardId: $cardId, columnId: $columnId}) {
-                clientMutationId
+        `mutation ($projectID: ID!, $issueID: ID!, $fieldID: ID!, $optionID: String) {
+            updateProjectV2ItemFieldValue(
+                input: {
+                    projectId: $projectID
+                    itemId: $issueID
+                    fieldId: $fieldID
+                    value: { 
+                        singleSelectOptionId: $optionID
+                    }
+                }
+            ) {
+                projectV2Item {
+                  id
+                }
             }
         }`, {
-            columnId: columnId,
-            cardId: cardId
-        });
+        projectID: projectID,
+        issueID: issueID,
+        fieldID: fieldID,
+        optionID: optionID
+    });
+    return result;
+}
 
+async function getIssueProjectID(issueID) {
+    const result = await graphqlApi.query(
+        `query ($issueID: ID!) { 
+            node(id: $issueID) { 
+              ... on Issue {
+                projectItems(first: 10) {
+                  nodes {
+                    id
+                    project {
+                        id
+                    }
+                  }
+                }
+              }
+            }
+        }`, {
+        issueID: issueID
+    });
     return result;
 }
 
 async function lastPullRequests(owner, repo, destinationBranch) {
-    const {repository: {pullRequests: {edges: pullRequests}}} = await graphqlApi.query(
+    const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!) {
             repository(owner: $owner, name: $name) {
-                pullRequests(last: 2, baseRefName: $branch) {
+                pullRequests(last: 20, baseRefName: $branch) {
                     edges {
                         node {
                             id
@@ -26,29 +59,38 @@ async function lastPullRequests(owner, repo, destinationBranch) {
                             headRefName
                             number
                             state
+                            closingIssuesReferences(first: 100) {
+                            edges {
+                                node {
+                                    id
+                                    title
+                                    url
+                                    }
+                                }
+                            }
                         }
                         cursor
                     }
                 }
             }
         }`, {
-            owner: owner,
-            name: repo,
-            branch: destinationBranch
-        });
+        owner: owner,
+        name: repo,
+        branch: destinationBranch
+    });
     return pullRequests;
 }
 
 const findAllNestedPullRequestsIssues = async (owner, repo, destinationBranch, endCursor) => {
     let issues = [];
     let pullRequests = await findAllNestedPullRequests(owner, repo, destinationBranch, endCursor);
-     
+
     if (pullRequests.length) {
         for (let i = 0; i < pullRequests.length; i++) {
-            let {closingIssuesReferences: {edges: refIssues}} = pullRequests[i].node;
+            let { closingIssuesReferences: { edges: refIssues } } = pullRequests[i].node;
             if (refIssues.length) {
                 for (let j = 0; j < refIssues.length; j++) {
-                    issues.push({id: refIssues[j].node.id, url: refIssues[j].node.url});
+                    issues.push({ id: refIssues[j].node.id, url: refIssues[j].node.url, title: refIssues[j].node.title });
                 }
             }
             let results = await findAllNestedPullRequestsIssues(owner, repo, pullRequests[i].node.headRefName, endCursor);
@@ -61,7 +103,7 @@ const findAllNestedPullRequestsIssues = async (owner, repo, destinationBranch, e
 
 
 async function findAllNestedPullRequests(owner, repo, destinationBranch, endCursor) {
-    const {repository: {pullRequests: {edges: pullRequests}}} = await graphqlApi.query(
+    const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!, ${endCursor === false ? `` : `$cursor: String!`}) {
           repository(owner: $owner, name: $name) {
             pullRequests(first: 100, baseRefName: $branch ${endCursor === false ? `` : `, after: $cursor`}) {
@@ -86,17 +128,17 @@ async function findAllNestedPullRequests(owner, repo, destinationBranch, endCurs
             }
           }
         }`, {
-            owner: owner,
-            name: repo,
-            branch: destinationBranch,
-            cursor: endCursor
-        });
+        owner: owner,
+        name: repo,
+        branch: destinationBranch,
+        cursor: endCursor
+    });
 
     return pullRequests;
 }
 
 async function getRepositoryProjects(owner, repo, projectName) {
-    const {repository: {projects: {nodes: projects}}} = await graphqlApi.query(
+    const { repository: { projects: { nodes: projects } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $projectName: String!) {
             repository(owner: $owner, name: $name) {
                 projects(search: $projectName, last: 1, states: [OPEN]) {
@@ -113,19 +155,20 @@ async function getRepositoryProjects(owner, repo, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            name: repo,
-            projectName: projectName
-        });
+        owner: owner,
+        name: repo,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getOrganizationProjects(owner, projectName) {
-    const {organization: {projects: {nodes: projects}}} = await graphqlApi.query(
-        `query ($owner: String!, $projectName: String!) {
+    const num = parseInt(projectName);
+    const { organization: { projects: { nodes: projects } } } = await graphqlApi.query(
+        `query ($owner: String!, $num: Int!) {
             organization(login: $owner) {
-                projects(search: $projectName, last: 1, states: [OPEN]) {
+                projectV2(number: $num) {
                     nodes {
                         name
                         id
@@ -139,15 +182,15 @@ async function getOrganizationProjects(owner, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            projectName: projectName
-        });
+        owner: owner,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getUserProjects(owner, projectName) {
-    const {user: {projects: {nodes: projects}}} = await graphqlApi.query(
+    const { user: { projects: { nodes: projects } } } = await graphqlApi.query(
         `query ($owner: String!, $projectName: String!) {
             user(login: $owner) {
                 projects(search: $projectName, last: 1, states: [OPEN]) {
@@ -164,15 +207,15 @@ async function getUserProjects(owner, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            projectName: projectName
-        });
+        owner: owner,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getIssueAssociedCards(url) {
-    const {resource: {projectCards: {nodes: cards}}} = await graphqlApi.query(
+    const { resource: { projectCards: { nodes: cards } } } = await graphqlApi.query(
         `query ($link: URI!) {
           resource(url: $link) {
             ... on Issue {
@@ -189,8 +232,8 @@ async function getIssueAssociedCards(url) {
             }
           }
         }`, {
-            link: url,
-        });
+        link: url,
+    });
 
     return cards;
 }
@@ -202,13 +245,14 @@ async function addIssueToProjectColumn(columnId, issueId) {
                 clientMutationId
             }
         }`, {
-            columnId: columnId,
-            issueId: issueId
-        });
+        columnId: columnId,
+        issueId: issueId
+    });
 }
 
 module.exports = {
     updateProjectCardColumn: updateProjectCardColumn,
+    getIssueProjectID: getIssueProjectID,
     lastPullRequests: lastPullRequests,
     findAllNestedPullRequestsIssues: findAllNestedPullRequestsIssues,
     findAllNestedPullRequests: findAllNestedPullRequests,

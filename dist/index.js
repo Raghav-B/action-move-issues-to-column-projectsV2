@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8265:
+/***/ 6443:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(2037));
-const utils_1 = __nccwpck_require__(61);
+const utils_1 = __nccwpck_require__(7345);
 /**
  * Commands
  *
@@ -100,7 +100,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 4814:
+/***/ 5875:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -135,12 +135,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(8265);
-const file_command_1 = __nccwpck_require__(8858);
-const utils_1 = __nccwpck_require__(61);
+const command_1 = __nccwpck_require__(6443);
+const file_command_1 = __nccwpck_require__(7606);
+const utils_1 = __nccwpck_require__(7345);
 const os = __importStar(__nccwpck_require__(2037));
 const path = __importStar(__nccwpck_require__(1017));
-const oidc_utils_1 = __nccwpck_require__(9683);
+const oidc_utils_1 = __nccwpck_require__(6642);
 /**
  * The code to exit an action
  */
@@ -419,7 +419,7 @@ exports.getIDToken = getIDToken;
 
 /***/ }),
 
-/***/ 8858:
+/***/ 7606:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -450,7 +450,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(7147));
 const os = __importStar(__nccwpck_require__(2037));
-const utils_1 = __nccwpck_require__(61);
+const utils_1 = __nccwpck_require__(7345);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -468,7 +468,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 9683:
+/***/ 6642:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -484,9 +484,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(4934);
-const auth_1 = __nccwpck_require__(7554);
-const core_1 = __nccwpck_require__(4814);
+const http_client_1 = __nccwpck_require__(6100);
+const auth_1 = __nccwpck_require__(797);
+const core_1 = __nccwpck_require__(5875);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -552,7 +552,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 61:
+/***/ 7345:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -599,7 +599,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 6348:
+/***/ 7830:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -660,7 +660,7 @@ exports.Context = Context;
 
 /***/ }),
 
-/***/ 1845:
+/***/ 4607:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -686,8 +686,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokit = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(6348));
-const utils_1 = __nccwpck_require__(2983);
+const Context = __importStar(__nccwpck_require__(7830));
+const utils_1 = __nccwpck_require__(1137);
 exports.context = new Context.Context();
 /**
  * Returns a hydrated octokit ready to use for GitHub Actions
@@ -703,7 +703,7 @@ exports.getOctokit = getOctokit;
 
 /***/ }),
 
-/***/ 2183:
+/***/ 1375:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -729,7 +729,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiBaseUrl = exports.getProxyAgent = exports.getAuthString = void 0;
-const httpClient = __importStar(__nccwpck_require__(4934));
+const httpClient = __importStar(__nccwpck_require__(6100));
 function getAuthString(token, options) {
     if (!token && !options.auth) {
         throw new Error('Parameter token or opts.auth is required');
@@ -753,7 +753,7 @@ exports.getApiBaseUrl = getApiBaseUrl;
 
 /***/ }),
 
-/***/ 2983:
+/***/ 1137:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -779,12 +779,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(6348));
-const Utils = __importStar(__nccwpck_require__(2183));
+const Context = __importStar(__nccwpck_require__(7830));
+const Utils = __importStar(__nccwpck_require__(1375));
 // octokit + plugins
-const core_1 = __nccwpck_require__(619);
-const plugin_rest_endpoint_methods_1 = __nccwpck_require__(7894);
-const plugin_paginate_rest_1 = __nccwpck_require__(7023);
+const core_1 = __nccwpck_require__(6993);
+const plugin_rest_endpoint_methods_1 = __nccwpck_require__(1400);
+const plugin_paginate_rest_1 = __nccwpck_require__(5092);
 exports.context = new Context.Context();
 const baseUrl = Utils.getApiBaseUrl();
 const defaults = {
@@ -814,7 +814,7 @@ exports.getOctokitOptions = getOctokitOptions;
 
 /***/ }),
 
-/***/ 7554:
+/***/ 797:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -880,7 +880,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 4934:
+/***/ 6100:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -888,7 +888,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const http = __nccwpck_require__(3685);
 const https = __nccwpck_require__(5687);
-const pm = __nccwpck_require__(8221);
+const pm = __nccwpck_require__(262);
 let tunnel;
 var HttpCodes;
 (function (HttpCodes) {
@@ -1307,7 +1307,7 @@ class HttpClient {
         if (useProxy) {
             // If using proxy, need tunnel
             if (!tunnel) {
-                tunnel = __nccwpck_require__(3125);
+                tunnel = __nccwpck_require__(9286);
             }
             const agentOptions = {
                 maxSockets: maxSockets,
@@ -1425,7 +1425,7 @@ exports.HttpClient = HttpClient;
 
 /***/ }),
 
-/***/ 8221:
+/***/ 262:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1490,7 +1490,7 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 5362:
+/***/ 8175:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1553,7 +1553,7 @@ exports.createTokenAuth = createTokenAuth;
 
 /***/ }),
 
-/***/ 619:
+/***/ 6993:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1561,11 +1561,11 @@ exports.createTokenAuth = createTokenAuth;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var universalUserAgent = __nccwpck_require__(9024);
-var beforeAfterHook = __nccwpck_require__(9906);
-var request = __nccwpck_require__(526);
-var graphql = __nccwpck_require__(5024);
-var authToken = __nccwpck_require__(5362);
+var universalUserAgent = __nccwpck_require__(7067);
+var beforeAfterHook = __nccwpck_require__(1010);
+var request = __nccwpck_require__(1206);
+var graphql = __nccwpck_require__(2539);
+var authToken = __nccwpck_require__(8175);
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
@@ -1737,7 +1737,7 @@ exports.Octokit = Octokit;
 
 /***/ }),
 
-/***/ 4584:
+/***/ 5471:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1745,8 +1745,8 @@ exports.Octokit = Octokit;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var isPlainObject = __nccwpck_require__(5280);
-var universalUserAgent = __nccwpck_require__(9024);
+var isPlainObject = __nccwpck_require__(5855);
+var universalUserAgent = __nccwpck_require__(7067);
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -2135,7 +2135,7 @@ exports.endpoint = endpoint;
 
 /***/ }),
 
-/***/ 5024:
+/***/ 2539:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2143,8 +2143,8 @@ exports.endpoint = endpoint;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var request = __nccwpck_require__(526);
-var universalUserAgent = __nccwpck_require__(9024);
+var request = __nccwpck_require__(1206);
+var universalUserAgent = __nccwpck_require__(7067);
 
 const VERSION = "4.8.0";
 
@@ -2261,7 +2261,7 @@ exports.withCustomRequest = withCustomRequest;
 
 /***/ }),
 
-/***/ 7023:
+/***/ 5092:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2486,7 +2486,7 @@ exports.paginatingEndpoints = paginatingEndpoints;
 
 /***/ }),
 
-/***/ 7894:
+/***/ 1400:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3519,7 +3519,7 @@ exports.restEndpointMethods = restEndpointMethods;
 
 /***/ }),
 
-/***/ 7538:
+/***/ 9635:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3529,8 +3529,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var deprecation = __nccwpck_require__(3610);
-var once = _interopDefault(__nccwpck_require__(6575));
+var deprecation = __nccwpck_require__(1827);
+var once = _interopDefault(__nccwpck_require__(144));
 
 const logOnceCode = once(deprecation => console.warn(deprecation));
 const logOnceHeaders = once(deprecation => console.warn(deprecation));
@@ -3601,7 +3601,7 @@ exports.RequestError = RequestError;
 
 /***/ }),
 
-/***/ 526:
+/***/ 1206:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3611,11 +3611,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var endpoint = __nccwpck_require__(4584);
-var universalUserAgent = __nccwpck_require__(9024);
-var isPlainObject = __nccwpck_require__(5280);
-var nodeFetch = _interopDefault(__nccwpck_require__(8476));
-var requestError = __nccwpck_require__(7538);
+var endpoint = __nccwpck_require__(5471);
+var universalUserAgent = __nccwpck_require__(7067);
+var isPlainObject = __nccwpck_require__(5855);
+var nodeFetch = _interopDefault(__nccwpck_require__(7749));
+var requestError = __nccwpck_require__(9635);
 
 const VERSION = "5.6.3";
 
@@ -3786,12 +3786,12 @@ exports.request = request;
 
 /***/ }),
 
-/***/ 9906:
+/***/ 1010:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var register = __nccwpck_require__(177)
-var addHook = __nccwpck_require__(6359)
-var removeHook = __nccwpck_require__(7124)
+var register = __nccwpck_require__(670)
+var addHook = __nccwpck_require__(9554)
+var removeHook = __nccwpck_require__(7812)
 
 // bind with array of arguments: https://stackoverflow.com/a/21792913
 var bind = Function.bind
@@ -3850,7 +3850,7 @@ module.exports.Collection = Hook.Collection
 
 /***/ }),
 
-/***/ 6359:
+/***/ 9554:
 /***/ ((module) => {
 
 module.exports = addHook;
@@ -3903,7 +3903,7 @@ function addHook(state, kind, name, hook) {
 
 /***/ }),
 
-/***/ 177:
+/***/ 670:
 /***/ ((module) => {
 
 module.exports = register;
@@ -3937,7 +3937,7 @@ function register(state, name, method, options) {
 
 /***/ }),
 
-/***/ 7124:
+/***/ 7812:
 /***/ ((module) => {
 
 module.exports = removeHook;
@@ -3963,7 +3963,7 @@ function removeHook(state, name, method) {
 
 /***/ }),
 
-/***/ 3610:
+/***/ 1827:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -3991,7 +3991,7 @@ exports.Deprecation = Deprecation;
 
 /***/ }),
 
-/***/ 5280:
+/***/ 5855:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4037,7 +4037,7 @@ exports.isPlainObject = isPlainObject;
 
 /***/ }),
 
-/***/ 8476:
+/***/ 7749:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -4050,7 +4050,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Stream = _interopDefault(__nccwpck_require__(2781));
 var http = _interopDefault(__nccwpck_require__(3685));
 var Url = _interopDefault(__nccwpck_require__(7310));
-var whatwgUrl = _interopDefault(__nccwpck_require__(2250));
+var whatwgUrl = _interopDefault(__nccwpck_require__(2091));
 var https = _interopDefault(__nccwpck_require__(5687));
 var zlib = _interopDefault(__nccwpck_require__(9796));
 
@@ -4203,7 +4203,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-	convert = (__nccwpck_require__(193).convert);
+	convert = (__nccwpck_require__(1524).convert);
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -5742,10 +5742,10 @@ exports.FetchError = FetchError;
 
 /***/ }),
 
-/***/ 6575:
+/***/ 144:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var wrappy = __nccwpck_require__(9420)
+var wrappy = __nccwpck_require__(2027)
 module.exports = wrappy(once)
 module.exports.strict = wrappy(onceStrict)
 
@@ -5791,7 +5791,7 @@ function onceStrict (fn) {
 
 /***/ }),
 
-/***/ 1833:
+/***/ 5012:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -5992,15 +5992,15 @@ module.exports.PROCESSING_OPTIONS = PROCESSING_OPTIONS;
 
 /***/ }),
 
-/***/ 3125:
+/***/ 9286:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(1415);
+module.exports = __nccwpck_require__(350);
 
 
 /***/ }),
 
-/***/ 1415:
+/***/ 350:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6272,7 +6272,7 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 9024:
+/***/ 7067:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6298,7 +6298,7 @@ exports.getUserAgent = getUserAgent;
 
 /***/ }),
 
-/***/ 3849:
+/***/ 9260:
 /***/ ((module) => {
 
 "use strict";
@@ -6495,12 +6495,12 @@ conversions["RegExp"] = function (V, opts) {
 
 /***/ }),
 
-/***/ 2269:
+/***/ 6744:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-const usm = __nccwpck_require__(2640);
+const usm = __nccwpck_require__(5622);
 
 exports.implementation = class URLImpl {
   constructor(constructorArgs) {
@@ -6703,15 +6703,15 @@ exports.implementation = class URLImpl {
 
 /***/ }),
 
-/***/ 8273:
+/***/ 4311:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-const conversions = __nccwpck_require__(3849);
-const utils = __nccwpck_require__(9631);
-const Impl = __nccwpck_require__(2269);
+const conversions = __nccwpck_require__(9260);
+const utils = __nccwpck_require__(2184);
+const Impl = __nccwpck_require__(6744);
 
 const impl = utils.implSymbol;
 
@@ -6907,32 +6907,32 @@ module.exports = {
 
 /***/ }),
 
-/***/ 2250:
+/***/ 2091:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-exports.URL = __nccwpck_require__(8273)["interface"];
-exports.serializeURL = __nccwpck_require__(2640).serializeURL;
-exports.serializeURLOrigin = __nccwpck_require__(2640).serializeURLOrigin;
-exports.basicURLParse = __nccwpck_require__(2640).basicURLParse;
-exports.setTheUsername = __nccwpck_require__(2640).setTheUsername;
-exports.setThePassword = __nccwpck_require__(2640).setThePassword;
-exports.serializeHost = __nccwpck_require__(2640).serializeHost;
-exports.serializeInteger = __nccwpck_require__(2640).serializeInteger;
-exports.parseURL = __nccwpck_require__(2640).parseURL;
+exports.URL = __nccwpck_require__(4311)["interface"];
+exports.serializeURL = __nccwpck_require__(5622).serializeURL;
+exports.serializeURLOrigin = __nccwpck_require__(5622).serializeURLOrigin;
+exports.basicURLParse = __nccwpck_require__(5622).basicURLParse;
+exports.setTheUsername = __nccwpck_require__(5622).setTheUsername;
+exports.setThePassword = __nccwpck_require__(5622).setThePassword;
+exports.serializeHost = __nccwpck_require__(5622).serializeHost;
+exports.serializeInteger = __nccwpck_require__(5622).serializeInteger;
+exports.parseURL = __nccwpck_require__(5622).parseURL;
 
 
 /***/ }),
 
-/***/ 2640:
+/***/ 5622:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 const punycode = __nccwpck_require__(5477);
-const tr46 = __nccwpck_require__(1833);
+const tr46 = __nccwpck_require__(5012);
 
 const specialSchemes = {
   ftp: 21,
@@ -8231,7 +8231,7 @@ module.exports.parseURL = function (input, options) {
 
 /***/ }),
 
-/***/ 9631:
+/***/ 2184:
 /***/ ((module) => {
 
 "use strict";
@@ -8259,7 +8259,7 @@ module.exports.implForWrapper = function (wrapper) {
 
 /***/ }),
 
-/***/ 9420:
+/***/ 2027:
 /***/ ((module) => {
 
 // Returns a wrapper function that returns a wrapped callback
@@ -8299,10 +8299,10 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 3811:
+/***/ 6078:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const {graphql} = __nccwpck_require__(5024);
+const {graphql} = __nccwpck_require__(2539);
 let instance = null;
 
 class graphqlApi {
@@ -8327,12 +8327,12 @@ module.exports = graphqlApi;
 
 /***/ }),
 
-/***/ 3099:
+/***/ 4280:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-const core = __nccwpck_require__(4814);
-const github = __nccwpck_require__(1845);
-const {getIssueAssociedCards, addIssueToProjectColumn, updateProjectCardColumn} = __nccwpck_require__(6480)
+const core = __nccwpck_require__(5875);
+const github = __nccwpck_require__(4607);
+const {getIssueAssociedCards, addIssueToProjectColumn, updateProjectCardColumn} = __nccwpck_require__(8232)
 
 exports.issuesWorkflow = async function (owner, repo, columnId, projectName) {
     const marker = core.getInput('marker');
@@ -8364,23 +8364,31 @@ exports.issuesWorkflow = async function (owner, repo, columnId, projectName) {
 
 /***/ }),
 
-/***/ 5085:
+/***/ 2746:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-const core = __nccwpck_require__(4814);
-const github = __nccwpck_require__(1845);
+const core = __nccwpck_require__(5875);
+const github = __nccwpck_require__(4607);
 const {
     findAllNestedPullRequestsIssues,
     lastPullRequests,
     updateProjectCardColumn,
     getIssueAssociedCards,
-    addIssueToProjectColumn
-} = __nccwpck_require__(6480)
+    addIssueToProjectColumn,
+    getIssueProjectID
+} = __nccwpck_require__(8232)
 
-exports.prWorkflow = async function (owner, repo, columnId, projectName) {
-    const destBranch = core.getInput('branch');
-    
-    if (destBranch !== github.context.payload.pull_request.base.ref || github.context.payload.pull_request.base.merged === false) {
+exports.prWorkflow = async function () {
+    const owner = core.getInput('owner');
+    const repo = core.getInput('repo');
+    const destBranch = github.context.payload.pull_request.base.ref;
+
+    console.log("Destination branch: ", destBranch);
+
+    const fieldID = core.getInput('fieldID');
+    const optionID = core.getInput('optionID');
+
+    if (github.context.payload.pull_request.base.merged === false) {
         return;
     }
 
@@ -8393,57 +8401,102 @@ exports.prWorkflow = async function (owner, repo, columnId, projectName) {
         console.log(`Not found cursor for PR!`);
         return;
     }
-    const cursor = lastPRs.length === 1 ? false : lastPRs[0].cursor;
-    let issues = (await findAllNestedPullRequestsIssues(owner, repo, destBranch, cursor)).filter((v, i, a) => a.findIndex(v2 => (v2.id === v.id)) === i);
-    
+
+    let issues = [];
+    for (let i = 0; i < lastPRs.length; i++) {
+        const closingIssues = lastPRs[i].node.closingIssuesReferences.edges;
+
+        for (let j = 0; j < closingIssues.length; j++) {
+            issues.push(closingIssues[j].node);
+        }
+    }
+
+    console.log(issues);
+
     if (issues.length === 0) {
         console.log(`Not found any issues related to current PR and all children PRs`);
         return;
     }
     for (let i = 0; i < issues.length; i++) {
         let issue = issues[i];
-        const checkIfIssueIsAssociated = await getIssueAssociedCards(issue.url);
-        if (checkIfIssueIsAssociated.length === 0) {
-            await addIssueToProjectColumn(columnId, issue.id);
-            continue;
+        console.log("Name of issue to move: ", issue.title);
+
+        const res = await getIssueProjectID(issue.id);
+        const projectList = res.node.projectItems.nodes;
+        console.log(projectList);
+
+        // Iterate through every project linked to this issue
+        for (let j = 0; j < projectList.length; j++) {
+            const issueNodeID = projectList[j].id;
+            const projectID = projectList[j].project.id;
+
+            // Update columns in every project that contains this issue
+            await updateProjectCardColumn(projectID, fieldID, issueNodeID, optionID);
         }
 
-        let projectCard = checkIfIssueIsAssociated.filter(card => card.project.name === projectName);
-        if (!projectCard[0]) {
-            continue;
-        }
-
-        await updateProjectCardColumn(projectCard[0].id, columnId);
     }
 }
 
 
 /***/ }),
 
-/***/ 6480:
+/***/ 8232:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const graphqlApi = __nccwpck_require__(3811);
+const graphqlApi = __nccwpck_require__(6078);
 
-async function updateProjectCardColumn(cardId, columnId) {
+async function updateProjectCardColumn(projectID, fieldID, issueID, optionID) {
     const result = await graphqlApi.query(
-        `mutation updateProjectCard($cardId: ID!, $columnId: ID!) {
-            moveProjectCard(input:{cardId: $cardId, columnId: $columnId}) {
-                clientMutationId
+        `mutation ($projectID: ID!, $issueID: ID!, $fieldID: ID!, $optionID: String) {
+            updateProjectV2ItemFieldValue(
+                input: {
+                    projectId: $projectID
+                    itemId: $issueID
+                    fieldId: $fieldID
+                    value: { 
+                        singleSelectOptionId: $optionID
+                    }
+                }
+            ) {
+                projectV2Item {
+                  id
+                }
             }
         }`, {
-            columnId: columnId,
-            cardId: cardId
-        });
+        projectID: projectID,
+        issueID: issueID,
+        fieldID: fieldID,
+        optionID: optionID
+    });
+    return result;
+}
 
+async function getIssueProjectID(issueID) {
+    const result = await graphqlApi.query(
+        `query ($issueID: ID!) { 
+            node(id: $issueID) { 
+              ... on Issue {
+                projectItems(first: 10) {
+                  nodes {
+                    id
+                    project {
+                        id
+                    }
+                  }
+                }
+              }
+            }
+        }`, {
+        issueID: issueID
+    });
     return result;
 }
 
 async function lastPullRequests(owner, repo, destinationBranch) {
-    const {repository: {pullRequests: {edges: pullRequests}}} = await graphqlApi.query(
+    const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!) {
             repository(owner: $owner, name: $name) {
-                pullRequests(last: 2, baseRefName: $branch) {
+                pullRequests(last: 20, baseRefName: $branch) {
                     edges {
                         node {
                             id
@@ -8451,29 +8504,38 @@ async function lastPullRequests(owner, repo, destinationBranch) {
                             headRefName
                             number
                             state
+                            closingIssuesReferences(first: 100) {
+                            edges {
+                                node {
+                                    id
+                                    title
+                                    url
+                                    }
+                                }
+                            }
                         }
                         cursor
                     }
                 }
             }
         }`, {
-            owner: owner,
-            name: repo,
-            branch: destinationBranch
-        });
+        owner: owner,
+        name: repo,
+        branch: destinationBranch
+    });
     return pullRequests;
 }
 
 const findAllNestedPullRequestsIssues = async (owner, repo, destinationBranch, endCursor) => {
     let issues = [];
     let pullRequests = await findAllNestedPullRequests(owner, repo, destinationBranch, endCursor);
-     
+
     if (pullRequests.length) {
         for (let i = 0; i < pullRequests.length; i++) {
-            let {closingIssuesReferences: {edges: refIssues}} = pullRequests[i].node;
+            let { closingIssuesReferences: { edges: refIssues } } = pullRequests[i].node;
             if (refIssues.length) {
                 for (let j = 0; j < refIssues.length; j++) {
-                    issues.push({id: refIssues[j].node.id, url: refIssues[j].node.url});
+                    issues.push({ id: refIssues[j].node.id, url: refIssues[j].node.url, title: refIssues[j].node.title });
                 }
             }
             let results = await findAllNestedPullRequestsIssues(owner, repo, pullRequests[i].node.headRefName, endCursor);
@@ -8486,7 +8548,7 @@ const findAllNestedPullRequestsIssues = async (owner, repo, destinationBranch, e
 
 
 async function findAllNestedPullRequests(owner, repo, destinationBranch, endCursor) {
-    const {repository: {pullRequests: {edges: pullRequests}}} = await graphqlApi.query(
+    const { repository: { pullRequests: { edges: pullRequests } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $branch: String!, ${endCursor === false ? `` : `$cursor: String!`}) {
           repository(owner: $owner, name: $name) {
             pullRequests(first: 100, baseRefName: $branch ${endCursor === false ? `` : `, after: $cursor`}) {
@@ -8511,17 +8573,17 @@ async function findAllNestedPullRequests(owner, repo, destinationBranch, endCurs
             }
           }
         }`, {
-            owner: owner,
-            name: repo,
-            branch: destinationBranch,
-            cursor: endCursor
-        });
+        owner: owner,
+        name: repo,
+        branch: destinationBranch,
+        cursor: endCursor
+    });
 
     return pullRequests;
 }
 
 async function getRepositoryProjects(owner, repo, projectName) {
-    const {repository: {projects: {nodes: projects}}} = await graphqlApi.query(
+    const { repository: { projects: { nodes: projects } } } = await graphqlApi.query(
         `query ($owner: String!, $name: String!, $projectName: String!) {
             repository(owner: $owner, name: $name) {
                 projects(search: $projectName, last: 1, states: [OPEN]) {
@@ -8538,19 +8600,20 @@ async function getRepositoryProjects(owner, repo, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            name: repo,
-            projectName: projectName
-        });
+        owner: owner,
+        name: repo,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getOrganizationProjects(owner, projectName) {
-    const {organization: {projects: {nodes: projects}}} = await graphqlApi.query(
-        `query ($owner: String!, $projectName: String!) {
+    const num = parseInt(projectName);
+    const { organization: { projects: { nodes: projects } } } = await graphqlApi.query(
+        `query ($owner: String!, $num: Int!) {
             organization(login: $owner) {
-                projects(search: $projectName, last: 1, states: [OPEN]) {
+                projectV2(number: $num) {
                     nodes {
                         name
                         id
@@ -8564,15 +8627,15 @@ async function getOrganizationProjects(owner, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            projectName: projectName
-        });
+        owner: owner,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getUserProjects(owner, projectName) {
-    const {user: {projects: {nodes: projects}}} = await graphqlApi.query(
+    const { user: { projects: { nodes: projects } } } = await graphqlApi.query(
         `query ($owner: String!, $projectName: String!) {
             user(login: $owner) {
                 projects(search: $projectName, last: 1, states: [OPEN]) {
@@ -8589,15 +8652,15 @@ async function getUserProjects(owner, projectName) {
                 }
             }
         }`, {
-            owner: owner,
-            projectName: projectName
-        });
+        owner: owner,
+        projectName: projectName
+    });
 
     return projects;
 }
 
 async function getIssueAssociedCards(url) {
-    const {resource: {projectCards: {nodes: cards}}} = await graphqlApi.query(
+    const { resource: { projectCards: { nodes: cards } } } = await graphqlApi.query(
         `query ($link: URI!) {
           resource(url: $link) {
             ... on Issue {
@@ -8614,8 +8677,8 @@ async function getIssueAssociedCards(url) {
             }
           }
         }`, {
-            link: url,
-        });
+        link: url,
+    });
 
     return cards;
 }
@@ -8627,13 +8690,14 @@ async function addIssueToProjectColumn(columnId, issueId) {
                 clientMutationId
             }
         }`, {
-            columnId: columnId,
-            issueId: issueId
-        });
+        columnId: columnId,
+        issueId: issueId
+    });
 }
 
 module.exports = {
     updateProjectCardColumn: updateProjectCardColumn,
+    getIssueProjectID: getIssueProjectID,
     lastPullRequests: lastPullRequests,
     findAllNestedPullRequestsIssues: findAllNestedPullRequestsIssues,
     findAllNestedPullRequests: findAllNestedPullRequests,
@@ -8644,9 +8708,10 @@ module.exports = {
     getRepositoryProjects: getRepositoryProjects
 }
 
+
 /***/ }),
 
-/***/ 193:
+/***/ 1524:
 /***/ ((module) => {
 
 module.exports = eval("require")("encoding");
@@ -8815,53 +8880,21 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(4814);
-const github = __nccwpck_require__(1845);
-const graphqlApi = __nccwpck_require__(3811);
-const {prWorkflow} = __nccwpck_require__(5085);
-const {issuesWorkflow} = __nccwpck_require__(3099);
-const {getRepositoryProjects, getOrganizationProjects, getUserProjects} = __nccwpck_require__(6480)
+const core = __nccwpck_require__(5875);
+const github = __nccwpck_require__(4607);
+const graphqlApi = __nccwpck_require__(6078);
+const { prWorkflow } = __nccwpck_require__(2746);
+const { issuesWorkflow } = __nccwpck_require__(4280);
+const { getRepositoryProjects, getOrganizationProjects, getUserProjects } = __nccwpck_require__(8232)
 
 async function run() {
     try {
         const githubToken = core.getInput('github_token');
-        const projectName = core.getInput('project', {required: true});
-        const projectColumn = core.getInput('column', {required: true});
-        const owner = core.getInput('owner');
-        const repo = core.getInput('repo');
-        const projectType = core.getInput('type');
         graphqlApi.init(githubToken);
 
-        let projects = [];
-        switch (projectType) {
-            case "repo":
-                projects = await getRepositoryProjects(owner, repo, projectName);
-                break;
-            case "org":
-                projects = await getOrganizationProjects(owner, projectName);
-                break;
-            case "user":
-                projects = await getUserProjects(owner, projectName);
-                break;
-        }
-
-        if (!projects[0] || projects[0].name !== projectName) {
-            console.log(`Project not found! Check if project with ${projectName} exists!`);
-            return;
-        }
-
-        const {columns: {nodes: columns}} = projects[0];
-        const projectColumns = columns.filter(column => column.name === projectColumn);
-        if (!projectColumns[0]) {
-            console.log(`The ${projectColumn} not found in ${projectName} project!`);
-            return;
-        }
-
-        const {eventName} = github.context;
+        const { eventName } = github.context;
         if (eventName === 'pull_request') {
-            prWorkflow(owner, repo, projectColumns[0].id, projectName);
-        } else {
-            issuesWorkflow(owner, repo, projectColumns[0].id, projectName);
+            prWorkflow();
         }
 
     } catch (e) {

@@ -5,13 +5,21 @@ const {
     lastPullRequests,
     updateProjectCardColumn,
     getIssueAssociedCards,
-    addIssueToProjectColumn
+    addIssueToProjectColumn,
+    getIssueProjectID
 } = require('./queries')
 
-exports.prWorkflow = async function (owner, repo, columnId, projectName) {
-    const destBranch = core.getInput('branch');
-    
-    if (destBranch !== github.context.payload.pull_request.base.ref || github.context.payload.pull_request.base.merged === false) {
+exports.prWorkflow = async function () {
+    const owner = core.getInput('owner');
+    const repo = core.getInput('repo');
+    const destBranch = github.context.payload.pull_request.base.ref;
+
+    console.log("Destination branch: ", destBranch);
+
+    const fieldID = core.getInput('fieldID');
+    const optionID = core.getInput('optionID');
+
+    if (github.context.payload.pull_request.base.merged === false) {
         return;
     }
 
@@ -24,26 +32,38 @@ exports.prWorkflow = async function (owner, repo, columnId, projectName) {
         console.log(`Not found cursor for PR!`);
         return;
     }
-    const cursor = lastPRs.length === 1 ? false : lastPRs[0].cursor;
-    let issues = (await findAllNestedPullRequestsIssues(owner, repo, destBranch, cursor)).filter((v, i, a) => a.findIndex(v2 => (v2.id === v.id)) === i);
-    
+
+    let issues = [];
+    for (let i = 0; i < lastPRs.length; i++) {
+        const closingIssues = lastPRs[i].node.closingIssuesReferences.edges;
+
+        for (let j = 0; j < closingIssues.length; j++) {
+            issues.push(closingIssues[j].node);
+        }
+    }
+
+    console.log(issues);
+
     if (issues.length === 0) {
         console.log(`Not found any issues related to current PR and all children PRs`);
         return;
     }
     for (let i = 0; i < issues.length; i++) {
         let issue = issues[i];
-        const checkIfIssueIsAssociated = await getIssueAssociedCards(issue.url);
-        if (checkIfIssueIsAssociated.length === 0) {
-            await addIssueToProjectColumn(columnId, issue.id);
-            continue;
+        console.log("Name of issue to move: ", issue.title);
+
+        const res = await getIssueProjectID(issue.id);
+        const projectList = res.node.projectItems.nodes;
+        console.log(projectList);
+
+        // Iterate through every project linked to this issue
+        for (let j = 0; j < projectList.length; j++) {
+            const issueNodeID = projectList[j].id;
+            const projectID = projectList[j].project.id;
+
+            // Update columns in every project that contains this issue
+            await updateProjectCardColumn(projectID, fieldID, issueNodeID, optionID);
         }
 
-        let projectCard = checkIfIssueIsAssociated.filter(card => card.project.name === projectName);
-        if (!projectCard[0]) {
-            continue;
-        }
-
-        await updateProjectCardColumn(projectCard[0].id, columnId);
     }
 }
